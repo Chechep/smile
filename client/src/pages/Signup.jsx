@@ -1,111 +1,65 @@
-import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
-  const { login } = useAuth(); // Replace with signup logic later
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("patient");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!name || !email || !password) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
-    // Mock signup
-    login(email, password);
-    alert("Account created successfully!");
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-      <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg w-96">
-        <h2 className="text-3xl font-bold text-center text-blue-600 dark:text-blue-400 mb-6">
-          Create Your Smile Account 😁
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-950 text-gray-800 dark:text-gray-100 pt-20">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 w-full max-w-md border border-gray-200 dark:border-gray-700"
+      >
+        <h2 className="text-3xl font-bold text-center mb-6 text-blue-600 dark:text-blue-400">
+          Create Account
         </h2>
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-6">
+          Join Smile Dental and start managing your appointments easily!
+        </p>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Name */}
+        <form className="space-y-5">
           <div>
-            <label className="block text-gray-700 dark:text-gray-300 mb-2">
-              Full Name
-            </label>
+            <label className="block text-sm font-medium mb-1">Full Name</label>
             <input
               type="text"
-              placeholder="Jane Doe"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="John Doe"
+              className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
             />
           </div>
 
-          {/* Email */}
           <div>
-            <label className="block text-gray-700 dark:text-gray-300 mb-2">
-              Email Address
-            </label>
+            <label className="block text-sm font-medium mb-1">Email</label>
             <input
               type="email"
               placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
             />
           </div>
 
-          {/* Password */}
           <div>
-            <label className="block text-gray-700 dark:text-gray-300 mb-2">
-              Password
-            </label>
+            <label className="block text-sm font-medium mb-1">Password</label>
             <input
               type="password"
               placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
             />
           </div>
 
-          {/* Role */}
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 mb-2">
-              Register As
-            </label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="patient">Patient</option>
-              <option value="dentist">Dentist</option>
-            </select>
-          </div>
-
-          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg shadow-md transition-all"
           >
             Sign Up
           </button>
         </form>
 
-        {/* Login Link */}
-        <p className="text-center text-gray-600 dark:text-gray-400 mt-6">
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-6">
           Already have an account?{" "}
-          <a
-            href="/login"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            Login here
-          </a>
+          <Link to="/login" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">
+            Log in
+          </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

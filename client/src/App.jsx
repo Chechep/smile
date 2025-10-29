@@ -7,24 +7,26 @@ import Signup from "./pages/Signup";
 import DashboardPatient from "./pages/DashboardPatient";
 import DashboardDentist from "./pages/DashboardDentist";
 import AdminPanel from "./pages/AdminPanel";
-import { AppProvider } from "./context/AppContext";
-import { AuthProvider } from "./context/AuthContext";
-
+import { ThemeProvider } from "./context/ThemeContext";
+import About from "./pages/About";
 export default function App() {
   return (
-    <AppProvider>
-      <AuthProvider>
+    <ThemeProvider>
+      <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/patient" element={<DashboardPatient />} />
-          <Route path="/dentist" element={<DashboardDentist />} />
-          <Route path="/admin" element={<AdminPanel />} />
-        </Routes>
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard-patient" element={<DashboardPatient />} />
+            <Route path="/dashboard-dentist" element={<DashboardDentist />} />
+            <Route path="/admin-panel" element={<AdminPanel />} />
+          </Routes>
+        </main>
         <Footer />
-      </AuthProvider>
-    </AppProvider>
+      </div>
+    </ThemeProvider>
   );
 }

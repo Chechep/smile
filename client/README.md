@@ -10,7 +10,7 @@ smile/
 │   │   │   ├── Footer.jsx
 │   │   │   ├── AppointmentCard.jsx
 │   │   │   ├── DentistCard.jsx
-│   │   │   └── Loader.jsx
+│   │   │   ├── DarkModeToggle.jsx
 │   │   ├── pages/
 │   │   │   ├── Home.jsx
 │   │   │   ├── Login.jsx
@@ -20,6 +20,7 @@ smile/
 │   │   │   └── AdminPanel.jsx
 │   │   ├── context/
 │   │   │   ├── AuthContext.jsx
+│   │   │   ├── ThemeContext.jsx
 │   │   │   └── AppContext.jsx
 │   │   ├── utils/
 │   │   │   ├── api.js          # Axios / fetch calls to Flask API
