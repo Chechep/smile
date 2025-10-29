@@ -7,17 +7,22 @@ import Signup from "./pages/Signup";
 import DashboardPatient from "./pages/DashboardPatient";
 import DashboardDentist from "./pages/DashboardDentist";
 import AdminPanel from "./pages/AdminPanel";
-import { ThemeProvider } from "./context/ThemeContext";
 import About from "./pages/About";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
+import { ThemeProvider } from "./context/ThemeContext";
+
 export default function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors">
         <Navbar />
-        <main className="flex-grow">
+        <main className="flex-grow pt-20"> {/* Adds space under fixed navbar */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard-patient" element={<DashboardPatient />} />

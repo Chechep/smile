@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Calendar, Heart, User, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import DentistCard from "../components/DentistCard";
-import AppointmentCard from "../components/AppointmentCard";
 
 export default function Home() {
   return (
@@ -30,10 +29,10 @@ export default function Home() {
               Book Appointment
             </Link>
             <Link
-              to="/about"
+              to="/services"
               className="border border-blue-600 hover:bg-blue-600 hover:text-white text-blue-600 font-semibold py-3 px-6 rounded-xl shadow transition"
             >
-              Learn More
+              Explore Services
             </Link>
           </div>
         </motion.div>
@@ -48,47 +47,8 @@ export default function Home() {
         />
       </section>
 
-      {/* Services Section */}
-      <section className="py-20 px-6 md:px-16 bg-white dark:bg-gray-800 transition-colors">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
-          Our Dental Services
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            {
-              icon: <Heart className="w-10 h-10 text-blue-600 mb-4" />,
-              title: "Cosmetic Dentistry",
-              desc: "Get the smile of your dreams with whitening, veneers, and more.",
-            },
-            {
-              icon: <User className="w-10 h-10 text-blue-600 mb-4" />,
-              title: "Family Care",
-              desc: "Gentle, comprehensive dental care for all ages — kids to seniors.",
-            },
-            {
-              icon: <Calendar className="w-10 h-10 text-blue-600 mb-4" />,
-              title: "Check-ups & Cleaning",
-              desc: "Keep your teeth healthy and bright with regular check-ups.",
-            },
-          ].map((service, index) => (
-            <motion.div
-              key={index}
-              className="p-8 rounded-2xl bg-gray-50 dark:bg-gray-900 shadow-sm hover:shadow-lg transition text-center"
-              whileHover={{ scale: 1.03 }}
-            >
-              {service.icon}
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">{service.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
       {/* Featured Dentists */}
-      <section className="py-20 px-6 md:px-16 bg-gray-50 dark:bg-gray-900 transition-colors">
+      <section className="py-20 px-6 md:px-16 bg-white dark:bg-gray-800 transition-colors">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
           Meet Our Specialists
         </h2>
@@ -136,7 +96,7 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials */}
       <section className="py-20 px-6 md:px-16 bg-white dark:bg-gray-800 transition-colors">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
           What Our Patients Say
