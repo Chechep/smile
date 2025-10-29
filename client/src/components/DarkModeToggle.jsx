@@ -1,3 +1,4 @@
+// src/components/DarkModeToggle.jsx
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
@@ -7,13 +8,10 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={toggleDarkMode}
-      className="p-2 rounded-full border border-gray-300 dark:border-gray-700 hover:scale-105 transition-all bg-white dark:bg-gray-800 shadow-md"
+      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:scale-105 transition"
+      title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {darkMode ? (
-        <Sun className="text-yellow-400 w-5 h-5" />
-      ) : (
-        <Moon className="text-gray-800 w-5 h-5" />
-      )}
+      {darkMode ? <Sun size={18} /> : <Moon size={18} />}
     </button>
   );
 }

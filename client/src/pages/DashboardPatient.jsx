@@ -1,58 +1,217 @@
-import { useEffect } from "react";
-import { CalendarDays, MessageCircle, ClipboardList } from "lucide-react";
 import { motion } from "framer-motion";
+import { CalendarDays, Stethoscope, Clock, HeartPulse } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function DashboardPatient() {
-  useEffect(() => {
-    document.title = "Patient Dashboard - Smile App";
-  }, []);
+  const navigate = useNavigate();
 
-  const cards = [
+  const stats = [
     {
-      title: "Book Appointment",
-      icon: <CalendarDays className="w-10 h-10 text-blue-500" />,
-      desc: "Schedule a new appointment with your preferred dentist.",
-      action: "Book Now",
+      icon: <CalendarDays className="w-8 h-8 text-blue-600" />,
+      title: "Upcoming Appointment",
+      value: "Nov 5, 10:00 AM",
+      color: "bg-blue-50 dark:bg-blue-900/30",
     },
     {
-      title: "View Records",
-      icon: <ClipboardList className="w-10 h-10 text-green-500" />,
-      desc: "Access your dental history and past treatments.",
-      action: "View Records",
+      icon: <Stethoscope className="w-8 h-8 text-green-600" />,
+      title: "Assigned Dentist",
+      value: "Dr. Jane Mwangi",
+      color: "bg-green-50 dark:bg-green-900/30",
     },
     {
-      title: "Messages",
-      icon: <MessageCircle className="w-10 h-10 text-yellow-500" />,
-      desc: "Chat with your dentist or clinic support.",
-      action: "Open Chat",
+      icon: <Clock className="w-8 h-8 text-yellow-600" />,
+      title: "Last Visit",
+      value: "Oct 21, 2025",
+      color: "bg-yellow-50 dark:bg-yellow-900/30",
+    },
+    {
+      icon: <HeartPulse className="w-8 h-8 text-red-600" />,
+      title: "Treatment Progress",
+      value: "75%",
+      color: "bg-red-50 dark:bg-red-900/30",
     },
   ];
 
-  return (
-    <section className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8 transition-colors">
-      <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-10">
-        Welcome, Patient 👋
-      </h1>
+  const appointments = [
+    {
+      date: "Nov 5, 2025",
+      time: "10:00 AM",
+      dentist: "Dr. Jane Mwangi",
+      status: "Upcoming",
+    },
+    {
+      date: "Oct 21, 2025",
+      time: "09:30 AM",
+      dentist: "Dr. Peter Kamau",
+      status: "Completed",
+    },
+    {
+      date: "Sep 10, 2025",
+      time: "11:00 AM",
+      dentist: "Dr. Mary Achieng",
+      status: "Completed",
+    },
+  ];
 
-      <div className="grid md:grid-cols-3 gap-8">
-        {cards.map((card, i) => (
-          <motion.div
-            key={i}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 200 }}
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-md hover:shadow-lg p-8 flex flex-col justify-between"
+  const treatments = [
+    {
+      date: "Oct 21, 2025",
+      procedure: "Root Canal",
+      dentist: "Dr. Peter Kamau",
+      notes: "Successful treatment; follow-up after 2 weeks.",
+    },
+    {
+      date: "Sep 10, 2025",
+      procedure: "Teeth Cleaning",
+      dentist: "Dr. Mary Achieng",
+      notes: "Routine cleaning and plaque removal.",
+    },
+  ];
+
+  const handleBookAppointment = () => {
+    toast.success("Redirecting to Book Appointment page...");
+    navigate("/book-appointment");
+  };
+
+  const handleEditProfile = () => {
+    toast.success("Redirecting to Profile page...");
+    navigate("/profile");
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 px-6 md:px-12 transition-colors">
+      <motion.h1
+        className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-8 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        Patient Dashboard
+      </motion.h1>
+
+      {/* Stats */}
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        {stats.map((item, index) => (
+          <div
+            key={index}
+            className={`p-6 rounded-2xl shadow-sm hover:shadow-md transition-all ${item.color}`}
           >
-            <div>{card.icon}</div>
-            <h2 className="text-xl font-semibold mt-5 dark:text-white">
-              {card.title}
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mt-3">{card.desc}</p>
-            <button className="mt-5 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl transition">
-              {card.action}
-            </button>
-          </motion.div>
+            <div className="flex items-center justify-between mb-3">{item.icon}</div>
+            <h3 className="text-gray-700 dark:text-gray-300 text-sm font-medium mb-1">
+              {item.title}
+            </h3>
+            <p className="text-lg font-bold text-gray-900 dark:text-white">{item.value}</p>
+          </div>
         ))}
-      </div>
-    </section>
+      </motion.div>
+
+      {/* Appointment History */}
+      <motion.div
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 max-w-5xl mx-auto mb-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+          Appointment History
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="text-gray-600 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                <th className="py-3 px-4">Date</th>
+                <th className="py-3 px-4">Time</th>
+                <th className="py-3 px-4">Dentist</th>
+                <th className="py-3 px-4">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {appointments.map((appt, index) => (
+                <tr
+                  key={index}
+                  className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100/60 dark:hover:bg-gray-800/60 transition"
+                >
+                  <td className="py-3 px-4 text-gray-800 dark:text-gray-200">{appt.date}</td>
+                  <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{appt.time}</td>
+                  <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{appt.dentist}</td>
+                  <td
+                    className={`py-3 px-4 font-medium ${
+                      appt.status === "Completed" ? "text-green-600" : "text-blue-600"
+                    }`}
+                  >
+                    {appt.status}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </motion.div>
+
+      {/* Treatment History */}
+      <motion.div
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 max-w-5xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+      >
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">Treatment History</h2>
+        <div className="space-y-4">
+          {treatments.map((treat, index) => (
+            <div
+              key={index}
+              className="p-4 rounded-xl bg-gray-50 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-700"
+            >
+              <div className="flex justify-between items-center mb-2">
+                <p className="font-semibold text-gray-800 dark:text-gray-100">{treat.procedure}</p>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{treat.date}</span>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+                Dentist: <span className="font-medium">{treat.dentist}</span>
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Notes: {treat.notes}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Manage Section */}
+      <section className="mt-16 grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="p-8 rounded-2xl bg-blue-50 dark:bg-blue-900/30 shadow hover:shadow-lg transition"
+        >
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Book a New Appointment</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            Schedule your next visit with your preferred dentist.
+          </p>
+          <button
+            onClick={handleBookAppointment}
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-5 rounded-lg transition"
+          >
+            Book Now
+          </button>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="p-8 rounded-2xl bg-green-50 dark:bg-green-900/30 shadow hover:shadow-lg transition"
+        >
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">Update Profile</h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">Keep your personal and contact details up to date.</p>
+          <button
+            onClick={handleEditProfile}
+            className="bg-green-600 hover:bg-green-700 text-white py-2 px-5 rounded-lg transition"
+          >
+            Edit Profile
+          </button>
+        </motion.div>
+      </section>
+    </div>
   );
 }

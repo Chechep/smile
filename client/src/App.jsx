@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import DashboardPatient from "./pages/DashboardPatient";
 import DashboardDentist from "./pages/DashboardDentist";
-import AdminPanel from "./pages/AdminPanel";
+import AdminPanel from "./pages/DashboardAdmin";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";

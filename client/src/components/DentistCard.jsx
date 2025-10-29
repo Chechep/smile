@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Star } from "lucide-react";
-import BookAppointmentModal from "./BookAppointmentModal";
+import BookAppointmentModal from "./BookAppointment";
 
 export default function DentistCard({ name, specialty, image, rating }) {
   const [isOpen, setIsOpen] = useState(false);
