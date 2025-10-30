@@ -56,7 +56,7 @@ export default function Navbar() {
           to="/"
           className="text-2xl font-bold text-blue-600 dark:text-blue-400"
         >
-          Smile<span className="text-gray-900 dark:text-gray-100">Dental</span>
+          Smile<span className="text-gray-900 dark:text-gray-100"></span>
         </Link>
 
         {/* Desktop Menu */}

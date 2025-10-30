@@ -40,7 +40,7 @@ export default function AboutServices() {
         <div>
           <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-4">Our Mission</h2>
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-            At <span className="font-semibold text-blue-600">Smile Dental</span>, we’re dedicated to making dental care accessible, 
+            At <span className="font-semibold text-blue-600">Smile</span>, we’re dedicated to making dental care accessible, 
             comfortable, and tailored to your unique needs. Our mission is to promote oral health 
             through modern technology and a compassionate approach one smile at a time.
           </p>
