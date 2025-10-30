@@ -42,15 +42,15 @@ export default function AboutServices() {
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
             At <span className="font-semibold text-blue-600">Smile Dental</span>, we’re dedicated to making dental care accessible, 
             comfortable, and tailored to your unique needs. Our mission is to promote oral health 
-            through modern technology and a compassionate approach — one smile at a time.
+            through modern technology and a compassionate approach one smile at a time.
           </p>
         </div>
         <div>
           <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-4">Our Vision</h2>
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
             We aim to be the leading dental care provider by integrating innovative treatments, 
-            digital convenience, and patient-centered care — ensuring that every visit feels comfortable, 
-            transparent, and rewarding.
+            digital convenience and patient-centered care ensuring that every visit feels comfortable, 
+            transparent and rewarding.
           </p>
         </div>
       </div>
