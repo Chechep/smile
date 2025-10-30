@@ -8,7 +8,6 @@ import DashboardPatient from "./pages/DashboardPatient";
 import DashboardDentist from "./pages/DashboardDentist";
 import AdminPanel from "./pages/DashboardAdmin";
 import About from "./pages/About";
-import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import { ThemeProvider } from "./context/ThemeContext";
 
@@ -21,7 +20,6 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
