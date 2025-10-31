@@ -6,6 +6,7 @@ import {
   Lock,
   CalendarDays,
   Stethoscope,
+  ArrowLeft,
 } from "lucide-react";
 
 export default function PatientProfile() {
@@ -68,6 +69,16 @@ export default function PatientProfile() {
   return (
     <section className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors pt-28 px-6 pb-16">
       <div className="max-w-4xl mx-auto">
+
+        {/* Back Button */}
+        <button
+          onClick={() => navigate("/dashboard-patient")}
+          className="flex items-center gap-2 text-sky-600 dark:text-sky-400 mb-6 hover:underline"
+        >
+          <ArrowLeft size={20} />
+          Back
+        </button>
+
         {/* Profile Card */}
         <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 border border-gray-200 dark:border-gray-700 mb-10">
           <div className="flex flex-col items-center mb-6">

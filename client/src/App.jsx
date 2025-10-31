@@ -13,7 +13,7 @@ import Services from "./pages/Services";
 import ForgotPassword from "./pages/ForgotPassword";
 import { ThemeProvider } from "./context/ThemeContext";
 import BookAppointment from "./components/BookAppointment";
-import PatientProfile from "./pages/PatientProfile";
+import PatientProfile from "./pages/Profile";
 
 export default function App() {
   return (

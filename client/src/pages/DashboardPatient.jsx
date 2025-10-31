@@ -49,7 +49,7 @@ export default function DashboardPatient() {
 
   const stats = [
     {
-      icon: <CalendarDays className="w-8 h-8 text-blue-600" />,
+      icon: <CalendarDays className="w-8 h-8 text-sky-600" />,
       title: "Upcoming Appointment",
       value: "Nov 5, 10:00 AM",
       color: "bg-blue-50 dark:bg-blue-900/30",
@@ -124,7 +124,7 @@ export default function DashboardPatient() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+        <h2 className="text-xl font-semibold text-black dark:text-white mb-4">
           Appointment History
         </h2>
         <div className="overflow-x-auto">
@@ -153,7 +153,7 @@ export default function DashboardPatient() {
                     <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{appt.dentist}</td>
                     <td
                       className={`py-3 px-4 font-medium ${
-                        appt.status === "Completed" ? "text-green-600" : "text-blue-600"
+                        appt.status === "Completed" ? "text-green-600" : "text-sky-600"
                       }`}
                     >
                       {appt.status}
@@ -236,7 +236,7 @@ export default function DashboardPatient() {
           </p>
           <button
             onClick={() => navigate("/book-appointment")}
-            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-5 rounded-lg transition"
+            className="bg-sky-600 hover:bg-sky-800 text-white py-2 px-5 rounded-lg transition"
           >
             Book Now
           </button>
