@@ -37,6 +37,12 @@ export default function Login() {
     }
   };
 
+  const handleGoogleLogin = () => {
+    // Mock Google login: always logs in as patient
+    login("googleuser@example.com", "patient");
+    navigate("/dashboard-patient");
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-sky-100 to-white dark:from-black dark:to-gray-950 text-gray-800 dark:text-gray-100 pt-20">
       <motion.div
@@ -96,6 +102,7 @@ export default function Login() {
             ))}
           </div>
 
+          {/* Login Button */}
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
@@ -103,6 +110,30 @@ export default function Login() {
             className="w-full bg-sky-600 hover:bg-sky-700 text-white py-3 rounded-lg shadow-md transition-all hover:shadow-sky-400/50"
           >
             Log In
+          </motion.button>
+
+          {/* Divider */}
+          <div className="flex items-center justify-center mt-4">
+            <span className="h-px bg-gray-300 dark:bg-gray-700 w-1/4"></span>
+            <span className="text-sm mx-3 text-gray-500 dark:text-gray-400">
+              or
+            </span>
+            <span className="h-px bg-gray-300 dark:bg-gray-700 w-1/4"></span>
+          </div>
+
+          {/* Google Login Button */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full flex items-center justify-center gap-3 border border-gray-300 dark:border-gray-700 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+          >
+            <img
+              src="https://www.svgrepo.com/show/355037/google.svg"
+              alt="Google"
+              className="w-5 h-5"
+            />
+            <span>Login with Google</span>
           </motion.button>
         </form>
 
