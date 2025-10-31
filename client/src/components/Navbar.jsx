@@ -35,6 +35,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
+    { name: "Services", path: "/services" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -54,7 +55,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           to="/"
-          className="text-2xl font-bold text-blue-600 dark:text-blue-400"
+          className="text-2xl font-bold text-sky-600 dark:text-sky-400"
         >
           Smile<span className="text-gray-900 dark:text-gray-100"></span>
         </Link>
@@ -65,9 +66,9 @@ export default function Navbar() {
             <Link
               key={link.path}
               to={link.path}
-              className={`hover:text-blue-500 transition ${
+              className={`hover:text-sky-500 transition ${
                 location.pathname === link.path
-                  ? "text-blue-600 dark:text-blue-400 font-semibold"
+                  ? "text-sky-600 dark:text-sky-400 font-semibold"
                   : ""
               }`}
             >
@@ -78,9 +79,9 @@ export default function Navbar() {
           {!isLoggedIn && (
             <Link
               to="/login"
-              className={`hover:text-blue-500 transition ${
+              className={`hover:text-sky-500 transition ${
                 location.pathname === "/login"
-                  ? "text-blue-600 dark:text-blue-400 font-semibold"
+                  ? "text-sky-600 dark:text-sky-400 font-semibold"
                   : ""
               }`}
             >
@@ -93,7 +94,7 @@ export default function Navbar() {
         <div className="flex items-center space-x-4">
           {/* Role Icon + Label */}
           {isLoggedIn && userRole && (
-            <div className="flex items-center space-x-2 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-sm font-medium">
+            <div className="flex items-center space-x-2 bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 px-3 py-1 rounded-full text-sm font-medium">
               {roleIcon}
               <span className="capitalize">{userRole}</span>
             </div>
@@ -132,9 +133,9 @@ export default function Navbar() {
                 key={link.path}
                 to={link.path}
                 onClick={() => setMenuOpen(false)}
-                className={`hover:text-blue-500 transition ${
+                className={`hover:text-sky-500 transition ${
                   location.pathname === link.path
-                    ? "text-blue-600 dark:text-blue-400 font-semibold"
+                    ? "text-sky-600 dark:text-sky-400 font-semibold"
                     : ""
                 }`}
               >
@@ -146,9 +147,9 @@ export default function Navbar() {
               <Link
                 to="/login"
                 onClick={() => setMenuOpen(false)}
-                className={`hover:text-blue-500 transition ${
+                className={`hover:text-sky-500 transition ${
                   location.pathname === "/login"
-                    ? "text-blue-600 dark:text-blue-400 font-semibold"
+                    ? "text-sky-600 dark:text-sky-400 font-semibold"
                     : ""
                 }`}
               >
@@ -158,7 +159,7 @@ export default function Navbar() {
 
             {isLoggedIn && (
               <>
-                <div className="flex items-center space-x-2 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-sm font-medium">
+                <div className="flex items-center space-x-2 bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 px-3 py-1 rounded-full text-sm font-medium">
                   {roleIcon}
                   <span className="capitalize">{userRole}</span>
                 </div>

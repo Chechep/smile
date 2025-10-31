@@ -1,6 +1,15 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { User, Smile, Heart, Calendar } from "lucide-react";
+import {
+  User,
+  Smile,
+  Heart,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import dentistImg from "../assets/dentist.png";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -35,7 +44,7 @@ export default function Home() {
     },
   ];
 
-  const testimonials = [
+  const testimonialsData = [
     {
       name: "Jane Mwangi",
       review:
@@ -54,26 +63,79 @@ export default function Home() {
         "Their tech and attention to detail are unmatched. The environment is clean and comfortable.",
       rating: 5,
     },
+    {
+      name: "Kevin Mutua",
+      review:
+        "Professional service with a friendly atmosphere. I’ll definitely be back for my next cleaning!",
+      rating: 4.9,
+    },
+    {
+      name: "Grace Njeri",
+      review:
+        "The dentist explained every step clearly. I felt cared for and relaxed throughout.",
+      rating: 5,
+    },
+    {
+      name: "David Kamau",
+      review:
+        "Best dental experience ever! Highly skilled team and top-notch care.",
+      rating: 5,
+    },
+    {
+      name: "Sarah Nduta",
+      review:
+        "My experience was wonderful! They truly make you feel at home.",
+      rating: 5,
+    },
+    {
+      name: "Pauline Cherono",
+      review:
+        "Friendly and professional team! I’m smiling more confidently now.",
+      rating: 4.9,
+    },
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const visibleTestimonials = 4;
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) =>
+      prev >= testimonialsData.length - visibleTestimonials ? 0 : prev + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? testimonialsData.length - visibleTestimonials : prev - 1
+    );
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-black transition-colors">
       {/* ===== Hero Section ===== */}
-      <section className="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-16 py-20">
+      <section className="relative flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-16 py-20">
+        {/* Text Content */}
         <motion.div
-          className="text-center md:text-left md:w-1/2"
+          className="text-center md:text-left md:w-1/2 z-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
         >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
-            Brighten Your Smile with{" "}
-            <span className="text-sky-600">Smile Dental</span>
+            Brighten Your{" "}
+            <span className="text-sky-600">Smile </span>
           </h1>
           <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
             Experience professional dental care with a personal touch. From
-            check-ups to cosmetic procedures — we make your smile shine
+            check-ups to cosmetic procedures we make your smile shine
             confidently.
           </p>
           <div className="flex gap-4 justify-center md:justify-start">
@@ -92,15 +154,18 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <motion.img
-          src="https://images.unsplash.com/photo-1606813902912-0d7a3b3b5e29?auto=format&fit=crop&w=800&q=80"
-          alt="Dental Care"
-          className="w-full md:w-1/2 rounded-3xl shadow-lg mb-10 md:mb-0"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        />
+        {/* Background with Overlay */}
+        <div className="relative md:w-1/2 w-full mb-10 md:mb-0">
+          <motion.img
+            src={dentistImg}
+            alt="Dental Care"
+            className="w-full h-full object-cover rounded-3xl shadow-lg"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          />
+        </div>
       </section>
 
       {/* ===== Services Section ===== */}
@@ -109,10 +174,10 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeInUp}
-        className="py-20 px-6 md:px-16 bg-white dark:bg-gray-800 transition-colors"
+        className="py-20 px-6 md:px-16 bg-white dark:bg-black transition-colors"
       >
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
-          Our Dental Services
+        <h2 className="text-3xl font-bold text-center mb-12 text-black dark:text-white">
+          Dental Services
         </h2>
 
         <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto text-center">
@@ -122,7 +187,7 @@ export default function Home() {
               variants={fadeInUp}
               custom={index * 0.2}
               whileHover={{ scale: 1.05 }}
-              className="p-8 rounded-2xl bg-gray-50 dark:bg-gray-900 shadow-sm hover:shadow-lg transition"
+              className="p-8 rounded-2xl bg-white dark:bg-gray-900 shadow-sm hover:shadow-lg transition"
             >
               {service.icon}
               <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
@@ -140,33 +205,68 @@ export default function Home() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeInUp}
-        className="py-20 px-6 md:px-16 bg-gray-50 dark:bg-gray-900 transition-colors"
+        className="py-20 px-6 md:px-16 bg-sky-50 dark:bg-gray-950 transition-colors overflow-hidden relative"
       >
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
           What Our Patients Say
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {testimonials.map((testimonial, index) => (
+        <div className="relative max-w-6xl mx-auto">
+          <div className="overflow-hidden">
             <motion.div
-              key={index}
-              variants={fadeInUp}
-              custom={index * 0.2}
-              whileHover={{ scale: 1.03 }}
-              className="p-8 rounded-2xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg transition text-center"
+              className="flex transition-transform duration-1000 ease-in-out"
+              style={{
+                transform: `translateX(-${(currentIndex * 100) / visibleTestimonials}%)`,
+                width: `${(testimonialsData.length * 100) / visibleTestimonials}%`,
+              }}
             >
-              <User className="w-10 h-10 text-sky-600 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 mb-4 italic">
-                “{testimonial.review}”
-              </p>
-              <h3 className="font-semibold text-gray-800 dark:text-white">
-                {testimonial.name}
-              </h3>
-              <p className="text-sm text-sky-600 dark:text-sky-400">
-                {testimonial.rating} / 5.0
-              </p>
+              {testimonialsData.map((testimonial, index) => (
+                <div key={index} className="w-1/4 flex-shrink-0 px-3">
+                  <div className="p-8 rounded-2xl bg-white dark:bg-gray-800 shadow text-center">
+                    <User className="w-10 h-10 text-sky-600 mx-auto mb-4" />
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 italic">
+                      “{testimonial.review}”
+                    </p>
+                    <h3 className="font-semibold text-gray-800 dark:text-gray-300 mb-1">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-sm text-sky-500 dark:text-sky-400">
+                      {testimonial.rating} / 5.0
+                    </p>
+                  </div>
+                </div>
+              ))}
             </motion.div>
-          ))}
+          </div>
+
+          {/* Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow hover:bg-sky-100 dark:hover:bg-sky-900 transition"
+          >
+            <ChevronLeft className="text-sky-600" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow hover:bg-sky-100 dark:hover:bg-sky-900 transition"
+          >
+            <ChevronRight className="text-sky-600" />
+          </button>
+
+          {/* Dots */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {Array.from({
+              length: testimonialsData.length - visibleTestimonials + 1,
+            }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`w-3 h-3 rounded-full transition ${
+                  idx === currentIndex ? "bg-sky-600" : "bg-gray-400"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </motion.section>
 
@@ -180,10 +280,10 @@ export default function Home() {
       >
         <motion.div variants={fadeInUp} custom={0.1}>
           <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-4">
-            Our Mission
+             Mission
           </h2>
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-            At <span className="font-semibold text-sky-600">Smile Dental</span>,
+            At <span className="font-semibold text-sky-600">Smile</span>,
             we’re dedicated to making dental care accessible, comfortable, and
             tailored to every patient’s needs. Our mission is to promote oral
             health through technology and compassion — one smile at a time.
@@ -192,7 +292,7 @@ export default function Home() {
 
         <motion.div variants={fadeInUp} custom={0.2}>
           <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-4">
-            Our Vision
+             Vision
           </h2>
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
             We aim to be the leading dental provider in Kenya, known for

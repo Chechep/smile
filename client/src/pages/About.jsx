@@ -79,7 +79,7 @@ export default function AboutServices() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="p-8 rounded-2xl dark:bg-gray-800 shadow hover:shadow-lg transition"
+              className="p-8 rounded-2xl dark:bg-gray-900 shadow hover:shadow-lg transition"
               whileHover={{ scale: 1.05 }}
             >
               {service.icon}
@@ -98,9 +98,9 @@ export default function AboutServices() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeInUp}
-        className="bg-gray-50 dark:bg-gray-900 py-16 px-6"
+        className="bg-white dark:bg-black py-16 px-6"
       >
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-10">
+        <h2 className="text-3xl font-bold text-center text-black dark:text-white mb-10">
         Core Values
         </h2>
 
@@ -109,14 +109,14 @@ export default function AboutServices() {
             variants={fadeInUp}
             custom={0.1}
             whileHover={{ scale: 1.05 }}
-            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-md transition"
+            className="bg-white dark:bg-black p-8 rounded-2xl shadow-sm hover:shadow-md transition"
           >
-            <Users className="w-12 h-12 text-sky-500 mb-4 mx-auto" />
+            <Users className="w-12 h-12 text-green-500 mb-4 mx-auto" />
             <h3 className="text-xl font-semibold mb-2 dark:text-white">
               Patient First
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Every decision we make starts with what’s best for our patients —
+              Every decision we make starts with what’s best for our patients
               ensuring comfort, trust, and satisfaction at every visit.
             </p>
           </motion.div>
@@ -125,7 +125,7 @@ export default function AboutServices() {
             variants={fadeInUp}
             custom={0.2}
             whileHover={{ scale: 1.05 }}
-            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-md transition"
+            className="bg-white dark:bg-black p-8 rounded-2xl shadow-sm hover:shadow-md transition"
           >
             <HeartPulse className="w-12 h-12 text-red-500 mb-4 mx-auto" />
             <h3 className="text-xl font-semibold mb-2 dark:text-white">
@@ -141,7 +141,7 @@ export default function AboutServices() {
             variants={fadeInUp}
             custom={0.3}
             whileHover={{ scale: 1.05 }}
-            className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-md transition"
+            className="bg-white dark:bg-black p-8 rounded-2xl shadow-sm hover:shadow-md transition"
           >
             <Award className="w-12 h-12 text-yellow-500 mb-4 mx-auto" />
             <h3 className="text-xl font-semibold mb-2 dark:text-white">
@@ -161,14 +161,14 @@ export default function AboutServices() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeInUp}
-        className="max-w-6xl mx-auto py-20 px-6 grid md:grid-cols-2 gap-10"
+        className="bg-white dark:bg-black max-w-6xl mx-auto py-20 px-6 grid md:grid-cols-2 gap-10"
       >
         <motion.div variants={fadeInUp} custom={0.1}>
-          <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-4">
+          <h2 className="text-3xl font-semibold text-black dark:text-white mb-4">
             Our Mission
           </h2>
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-            At <span className="font-semibold text-sky-600">Smile</span>, we’re
+            At <span className="font-semibold text-sky-500">Smile</span>, we’re
             dedicated to making dental care accessible, comfortable, and
             tailored to your unique needs. Our mission is to promote oral health
             through modern technology and a compassionate approach — one smile
