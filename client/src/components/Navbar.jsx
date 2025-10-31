@@ -1,34 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  Menu,
-  X,
-  LogOut,
-  UserCircle2,
-  Stethoscope,
-  Shield,
-} from "lucide-react";
+import { Menu, X, LogOut, UserCircle2 } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 import DarkModeToggle from "./DarkModeToggle";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [userRole, setUserRole] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const role = localStorage.getItem("userRole");
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setUserRole(role);
-    setIsLoggedIn(loggedIn);
-  }, []);
-
   const handleLogout = () => {
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("isLoggedIn");
-    setUserRole(null);
-    setIsLoggedIn(false);
+    logout();
     navigate("/login");
   };
 
@@ -39,28 +22,28 @@ export default function Navbar() {
     { name: "Contact", path: "/contact" },
   ];
 
-  // Pick correct icon based on user role
-  const roleIcon =
-    userRole === "patient" ? (
-      <UserCircle2 size={20} />
-    ) : userRole === "dentist" ? (
-      <Stethoscope size={20} />
-    ) : userRole === "admin" ? (
-      <Shield size={20} />
-    ) : null;
-
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-lg bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700 shadow-sm transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="text-2xl font-bold text-sky-600 dark:text-sky-400"
-        >
-          Smile<span className="text-gray-900 dark:text-gray-100"></span>
-        </Link>
+        {/* Logo or Username */}
+        {user ? (
+          <button
+            onClick={() => navigate("/patient-profile")}
+            className="flex items-center gap-2 text-2xl font-bold text-sky-600 dark:text-sky-400 hover:text-sky-500 transition"
+          >
+            <UserCircle2 size={22} />
+            <span className="capitalize">{user.username}</span>
+          </button>
+        ) : (
+          <Link
+            to="/"
+            className="text-2xl font-bold text-sky-600 dark:text-sky-400"
+          >
+            Smile
+          </Link>
+        )}
 
-        {/* Desktop Menu */}
+        {/* Desktop Links */}
         <div className="hidden md:flex space-x-8 text-gray-700 dark:text-gray-200 font-medium">
           {navLinks.map((link) => (
             <Link
@@ -75,46 +58,24 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-
-          {!isLoggedIn && (
-            <Link
-              to="/login"
-              className={`hover:text-sky-500 transition ${
-                location.pathname === "/login"
-                  ? "text-sky-600 dark:text-sky-400 font-semibold"
-                  : ""
-              }`}
-            >
+          {!user && (
+            <Link to="/login" className="hover:text-sky-500 transition">
               Login
             </Link>
           )}
         </div>
 
-        {/* Right Side Controls */}
+        {/* Right Side */}
         <div className="flex items-center space-x-4">
-          {/* Role Icon + Label */}
-          {isLoggedIn && userRole && (
-            <div className="flex items-center space-x-2 bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 px-3 py-1 rounded-full text-sm font-medium">
-              {roleIcon}
-              <span className="capitalize">{userRole}</span>
-            </div>
-          )}
-
-          {/* Dark Mode Toggle */}
           <DarkModeToggle />
-
-          {/* Logout Icon */}
-          {isLoggedIn && (
+          {user && (
             <button
               onClick={handleLogout}
-              className="text-red-500 hover:text-red-600 dark:hover:text-red-400 transition"
-              title="Logout"
+              className="text-red-500 hover:text-red-600 transition"
             >
               <LogOut size={22} />
             </button>
           )}
-
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none"
@@ -124,9 +85,8 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white/95 dark:bg-gray-900/95 border-t border-gray-200 dark:border-gray-700 backdrop-blur-xl shadow-lg transition-all">
+        <div className="md:hidden bg-white/95 dark:bg-gray-900/95 border-t border-gray-200 dark:border-gray-700 shadow-lg transition-all">
           <div className="flex flex-col items-center py-4 space-y-4 text-gray-700 dark:text-gray-200">
             {navLinks.map((link) => (
               <Link
@@ -142,36 +102,23 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-
-            {!isLoggedIn && (
+            {!user && (
               <Link
                 to="/login"
                 onClick={() => setMenuOpen(false)}
-                className={`hover:text-sky-500 transition ${
-                  location.pathname === "/login"
-                    ? "text-sky-600 dark:text-sky-400 font-semibold"
-                    : ""
-                }`}
+                className="hover:text-sky-500 transition"
               >
                 Login
               </Link>
             )}
-
-            {isLoggedIn && (
-              <>
-                <div className="flex items-center space-x-2 bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 px-3 py-1 rounded-full text-sm font-medium">
-                  {roleIcon}
-                  <span className="capitalize">{userRole}</span>
-                </div>
-
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center space-x-2 text-red-500 hover:text-red-600 dark:hover:text-red-400 transition"
-                >
-                  <LogOut size={20} />
-                  <span>Logout</span>
-                </button>
-              </>
+            {user && (
+              <button
+                onClick={handleLogout}
+                className="flex items-center space-x-2 text-red-500 hover:text-red-600 transition"
+              >
+                <LogOut size={20} />
+                <span>Logout</span>
+              </button>
             )}
           </div>
         </div>

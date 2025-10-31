@@ -10,7 +10,10 @@ import AdminPanel from "./pages/DashboardAdmin";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Services from "./pages/Services";
+import ForgotPassword from "./pages/ForgotPassword";
 import { ThemeProvider } from "./context/ThemeContext";
+import BookAppointment from "./components/BookAppointment";
+import PatientProfile from "./pages/PatientProfile";
 
 export default function App() {
   return (
@@ -25,6 +28,9 @@ export default function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/patient-profile" element={<PatientProfile />} />
+            <Route path="/book-appointment" element={<BookAppointment />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard-patient" element={<DashboardPatient />} />
             <Route path="/dashboard-dentist" element={<DashboardDentist />} />
             <Route path="/admin-panel" element={<AdminPanel />} />

@@ -5,8 +5,9 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  const login = (email, password) => {
-    setUser({ email, role: "patient" }); // mock login
+  const login = (email, role = "patient") => {
+    const username = email.split("@")[0]; // simple username
+    setUser({ email, username, role });
   };
 
   const logout = () => setUser(null);
