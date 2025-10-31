@@ -44,53 +44,6 @@ export default function AboutServices() {
 
   return (
     <section className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-      {/* ===== Hero Section ===== */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-        className="text-center py-16 px-6 bg-gradient-to-r from-sky-900 to-sky-500 dark:from-black dark:to-sky-700 text-white"
-      >
-        <p className="max-w-2xl mx-auto text-lg opacity-90">
-          Bringing confident smiles to life through expert dental care,
-          innovation and compassion.
-        </p>
-      </motion.div>
-
-      {/* ===== Our Services ===== */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-        className="py-20 px-6 md:px-16 bg-white dark:bg-black transition-colors"
-      >
-        <h2 className="text-3xl font-bold text-center mb-12 text-black dark:text-white">
-        Dental Services
-        </h2>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto text-center">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={fadeInUp}
-              custom={index * 0.2}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="p-8 rounded-2xl dark:bg-gray-900 shadow hover:shadow-lg transition"
-              whileHover={{ scale: 1.05 }}
-            >
-              {service.icon}
-              <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">{service.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
 
       {/* ===== Core Values ===== */}
       <motion.div
@@ -165,25 +118,25 @@ export default function AboutServices() {
       >
         <motion.div variants={fadeInUp} custom={0.1}>
           <h2 className="text-3xl font-semibold text-black dark:text-white mb-4">
-            Our Mission
+             Mission
           </h2>
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
             At <span className="font-semibold text-sky-500">Smile</span>, we’re
             dedicated to making dental care accessible, comfortable, and
             tailored to your unique needs. Our mission is to promote oral health
-            through modern technology and a compassionate approach — one smile
+            through modern technology and a compassionate approach one smile
             at a time.
           </p>
         </motion.div>
 
         <motion.div variants={fadeInUp} custom={0.2}>
           <h2 className="text-3xl font-semibold text-gray-800 dark:text-white mb-4">
-            Our Vision
+             Vision
           </h2>
           <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
             We aim to be the leading dental care provider by integrating
             innovative treatments, digital convenience, and patient-centered
-            care — ensuring that every visit feels comfortable, transparent, and
+            care ensuring that every visit feels comfortable, transparent, and
             rewarding.
           </p>
         </motion.div>
