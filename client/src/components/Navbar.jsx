@@ -15,12 +15,22 @@ export default function Navbar() {
     navigate("/login");
   };
 
-  const navLinks = [
+  // Navigation links when user is logged in
+  const userNavLinks = [
+    { name: "Dashboard", path: "/dashboard-patient" },
+    { name: "Book Appointment", path: "/book-appointment" },
+    { name: "Contact", path: "/contact" },
+  ];
+
+  // Navigation links when user is not logged in
+  const guestNavLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Services", path: "/services" },
     { name: "Contact", path: "/contact" },
   ];
+
+  const navLinks = user ? userNavLinks : guestNavLinks;
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-lg bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700 shadow-sm transition-all">
@@ -28,7 +38,7 @@ export default function Navbar() {
         {/* Logo or Username */}
         {user ? (
           <button
-            onClick={() => navigate("/patient-profile")}
+            onClick={() => navigate("/dashboard-patient")}
             className="flex items-center gap-2 text-2xl font-bold text-sky-600 dark:text-sky-400 hover:text-sky-500 transition"
           >
             <UserCircle2 size={22} />
@@ -85,6 +95,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white/95 dark:bg-gray-900/95 border-t border-gray-200 dark:border-gray-700 shadow-lg transition-all">
           <div className="flex flex-col items-center py-4 space-y-4 text-gray-700 dark:text-gray-200">
@@ -113,7 +124,10 @@ export default function Navbar() {
             )}
             {user && (
               <button
-                onClick={handleLogout}
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
                 className="flex items-center space-x-2 text-red-500 hover:text-red-600 transition"
               >
                 <LogOut size={20} />
