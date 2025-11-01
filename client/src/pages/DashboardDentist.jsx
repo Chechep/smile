@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
-import { CalendarDays, Users, Clock, ClipboardList } from "lucide-react";
+import { CalendarDays, Users, Clock, ClipboardList, Phone, Mail } from "lucide-react";
+import { useState } from "react";
 
 export default function DentistPanel() {
+  const [showAllPatients, setShowAllPatients] = useState(false);
+
   const stats = [
     {
       icon: <CalendarDays className="w-8 h-8 text-blue-600" />,
@@ -56,6 +59,51 @@ export default function DentistPanel() {
     },
   ];
 
+  const patients = [
+    {
+      name: "John Doe",
+      issue: "Toothache and sensitivity",
+      phone: "+254 712 345 678",
+      email: "john.doe@email.com",
+      lastVisit: "2024-01-15"
+    },
+    {
+      name: "Mary Wanjiku",
+      issue: "Root canal treatment",
+      phone: "+254 723 456 789",
+      email: "mary.wanjiku@email.com",
+      lastVisit: "2024-01-10"
+    },
+    {
+      name: "Kevin Otieno",
+      issue: "Regular dental checkup",
+      phone: "+254 734 567 890",
+      email: "kevin.otieno@email.com",
+      lastVisit: "2024-01-08"
+    },
+    {
+      name: "Grace Achieng",
+      issue: "Cavity filling",
+      phone: "+254 745 678 901",
+      email: "grace.achieng@email.com",
+      lastVisit: "2024-01-05"
+    },
+    {
+      name: "David Kamau",
+      issue: "Teeth whitening",
+      phone: "+254 756 789 012",
+      email: "david.kamau@email.com",
+      lastVisit: "2024-01-03"
+    },
+    {
+      name: "Sarah Mwende",
+      issue: "Gum disease treatment",
+      phone: "+254 767 890 123",
+      email: "sarah.mwende@email.com",
+      lastVisit: "2023-12-28"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 px-6 md:px-12 transition-colors">
       <motion.h1
@@ -93,59 +141,114 @@ export default function DentistPanel() {
 
       {/* Appointment List */}
       <motion.div
-        className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 max-w-5xl mx-auto"
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 max-w-5xl mx-auto mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-          Today's Appointments
-        </h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="text-gray-600 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
-                <th className="py-3 px-4">Patient</th>
-                <th className="py-3 px-4">Time</th>
-                <th className="py-3 px-4">Service</th>
-                <th className="py-3 px-4">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {appointments.map((appt, index) => (
-                <tr
-                  key={index}
-                  className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100/60 dark:hover:bg-gray-800/60 transition"
-                >
-                  <td className="py-3 px-4 text-gray-800 dark:text-gray-200">
-                    {appt.patient}
-                  </td>
-                  <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
-                    {appt.time}
-                  </td>
-                  <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
-                    {appt.service}
-                  </td>
-                  <td
-                    className={`py-3 px-4 font-medium ${
-                      appt.status === "Completed"
-                        ? "text-green-600"
-                        : appt.status === "Ongoing"
-                        ? "text-yellow-600"
-                        : "text-blue-600"
-                    }`}
-                  >
-                    {appt.status}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+            Today's Appointments
+          </h2>
+          <button
+            onClick={() => setShowAllPatients(!showAllPatients)}
+            className="bg-sky-600 hover:bg-sky-700 text-white py-2 px-4 rounded-lg transition font-medium"
+          >
+            {showAllPatients ? "Show Appointments" : "View All Patients"}
+          </button>
         </div>
+
+        {!showAllPatients ? (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="text-gray-600 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                  <th className="py-3 px-4">Patient</th>
+                  <th className="py-3 px-4">Time</th>
+                  <th className="py-3 px-4">Service</th>
+                  <th className="py-3 px-4">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {appointments.map((appt, index) => (
+                  <tr
+                    key={index}
+                    className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100/60 dark:hover:bg-gray-800/60 transition"
+                  >
+                    <td className="py-3 px-4 text-gray-800 dark:text-gray-200">
+                      {appt.patient}
+                    </td>
+                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
+                      {appt.time}
+                    </td>
+                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
+                      {appt.service}
+                    </td>
+                    <td
+                      className={`py-3 px-4 font-medium ${
+                        appt.status === "Completed"
+                          ? "text-green-600"
+                          : appt.status === "Ongoing"
+                          ? "text-yellow-600"
+                          : "text-blue-600"
+                      }`}
+                    >
+                      {appt.status}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="text-gray-600 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                  <th className="py-3 px-4">Patient Name</th>
+                  <th className="py-3 px-4">Medical Issue</th>
+                  <th className="py-3 px-4">Phone</th>
+                  <th className="py-3 px-4">Email</th>
+                  <th className="py-3 px-4">Last Visit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {patients.map((patient, index) => (
+                  <tr
+                    key={index}
+                    className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100/60 dark:hover:bg-gray-800/60 transition"
+                  >
+                    <td className="py-3 px-4 text-gray-800 dark:text-gray-200 font-medium">
+                      {patient.name}
+                    </td>
+                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
+                      {patient.issue}
+                    </td>
+                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
+                      <div className="flex items-center gap-2">
+                        <Phone className="w-4 h-4" />
+                        {patient.phone}
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-4 h-4" />
+                        {patient.email}
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
+                      {patient.lastVisit}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </motion.div>
 
       {/* Manage Section */}
-      <section className="mt-16 grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+      <section className="mt-8 grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
         <motion.div
           whileHover={{ scale: 1.02 }}
           className="p-8 rounded-2xl bg-blue-50 dark:bg-blue-900/30 shadow hover:shadow-lg transition"
